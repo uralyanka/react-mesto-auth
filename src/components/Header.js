@@ -1,28 +1,20 @@
 import React from 'react';
-import { Link, Routes, Route, NavLink } from 'react-router-dom';
+import { Link, Routes, Route } from 'react-router-dom';
 import logo from "../images/mesto-header__logo.svg";
+import NavBar from './NavBar';
 
-export default function Header() {
+export default function Header({ handleLogOut, user }) {
   return (
     <header className="header">
       <Link to="/" className="header__link">
       <img alt="Лого сайта" className="header__logo" src={logo} />
       </Link>
-      
-      <nav className="header__nav">
-        <Routes>
-          <Route exact path="/">
-            <NavLink to="/sign-in" className="header__nav-link">Выйти</NavLink>
-          </Route>
-          <Route path="/sign-up">
-            <NavLink to="/sign-in" className="header__nav-link">Войти</NavLink>
-          </Route>
-          <Route path="/sign-in">
-            <NavLink to="/sign-up" className="header__nav-link">Регистрация</NavLink>
-          </Route>
-        </Routes>
-      </nav>
 
+      <Routes>
+        <Route path='/' element={<NavBar user={user} handleLogOut={handleLogOut}/>}/>
+        <Route path='/sign-up' element={<Link to='/sign-in' className="header__nav-link">Войти</Link>}/>
+        <Route path='/sign-in' element={<Link to='/sign-up' className="header__nav-link">Регистрация</Link>}/>
+      </Routes>
     </header>
   );
 }

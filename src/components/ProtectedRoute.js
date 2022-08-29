@@ -1,5 +1,5 @@
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-export default function ProtectedRoute({ loggedIn, ...props }) {
-  return loggedIn ? <Route {...props} /> : <Navigate to="/sign-in" />;
+export default function ProtectedRoute({ loggedIn, children }) {
+  return (loggedIn ? children : <Navigate to='/sign-in' />);
 }
