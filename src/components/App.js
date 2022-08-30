@@ -47,10 +47,12 @@ export default function App() {
     auth
       .signin({ email, password })
       .then((res) => {
-        setLoggedIn(true);
-        localStorage.setItem("token", res["token"]);
-        setUserData({ email: email });
-        navigate("/");
+        if (res.token) {
+          setLoggedIn(true);
+          localStorage.setItem("token", res.token);
+          setUserData({ email: email });
+          navigate("/");
+        }
       })
       .catch((err) => {
         setIsSuccessRegister(false);
@@ -64,16 +66,14 @@ export default function App() {
   }
 
   function handleCheckToken() {
-    if (localStorage.getItem("jwt")) {
-      let jwt = localStorage.getItem("jwt");
+    const token = localStorage.getItem("token");
+    if (token) {
       auth
-        .getContent(jwt)
+        .getContent(token)
         .then((res) => {
-          if (res) {
-            setUserData(res.data);
-            setLoggedIn(true);
-            navigate("/");
-          }
+          setLoggedIn(true);
+          setUserData(res.data);
+          navigate("/");
         })
         .catch((err) => {
           if (err === "Ошибка: 400")
@@ -92,6 +92,7 @@ export default function App() {
   function handleLogOut() {
     localStorage.removeItem("token");
     setLoggedIn(false);
+    setUserData({});
     navigate("/sign-in");
   }
 

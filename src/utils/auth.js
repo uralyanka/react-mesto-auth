@@ -30,7 +30,7 @@ export function signin({ email, password }) {
   }).then((res) => checkRes(res));
 }
 
-export function getContent({ token }) {
+export function getContent(token) {
   return fetch(`${baseAuthUrl}/users/me`, {
     method: "GET",
     headers: {
@@ -39,5 +39,4 @@ export function getContent({ token }) {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => checkRes(res))
-  .then(data => data)
 }
