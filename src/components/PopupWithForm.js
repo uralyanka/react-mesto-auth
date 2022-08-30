@@ -7,7 +7,7 @@ export default function PopupWithForm({
   children,
   buttonText,
 }) {
-  //деструктуризировала props + разметка
+  
   return (
     <div className={`popup popup_type_${type} ${isOpen && "popup_opened"}`}>
       <div className={`popup__container popup__container_type_${type}`}>

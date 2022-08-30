@@ -11,7 +11,10 @@ import Content from "./Content";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userAuth, setUserAuth] = useState({ email: "", _id: "" });
+  const [userData, setUserData] = useState({
+    email: "",
+    _id: "",
+  });
 
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isSuccessRegister, setIsSuccessRegister] = useState(false);
@@ -26,7 +29,7 @@ export default function App() {
     auth
       .register({ email, password })
       .then((res) => {
-        setUserAuth(res.data);
+        setUserData(res.data);
         navigate("/");
         setIsSuccessRegister(true);
         setIsInfoPopupOpen(true);
@@ -34,7 +37,8 @@ export default function App() {
       .catch((err) => {
         setIsSuccessRegister(false);
         setIsInfoPopupOpen(true);
-        if (err === "Ошибка: 400") return console.log("некорректно заполнено одно из полей");
+        if (err === "Ошибка: 400")
+          return console.log("некорректно заполнено одно из полей");
         console.log(err);
       });
   }
@@ -45,31 +49,37 @@ export default function App() {
       .then((res) => {
         setLoggedIn(true);
         localStorage.setItem("token", res["token"]);
-        setUserAuth({ email: email });
+        setUserData({ email: email });
         navigate("/");
       })
       .catch((err) => {
         setIsSuccessRegister(false);
         setIsInfoPopupOpen(true);
-        if (err === "Ошибка: 400") return console.log("не передано одно из полей");
-        if (err === "Ошибка: 401") return console.log("пользователь с email не найден");
+        if (err === "Ошибка: 400")
+          return console.log("не передано одно из полей");
+        if (err === "Ошибка: 401")
+          return console.log("пользователь с email не найден");
         console.log(err);
       });
   }
 
   function handleCheckToken() {
-    const token = localStorage.getItem("token");
-    if (token) {
+    if (localStorage.getItem("jwt")) {
+      let jwt = localStorage.getItem("jwt");
       auth
-        .getContent(token)
+        .getContent(jwt)
         .then((res) => {
-          setUserAuth(res.data);
-          setLoggedIn(true);
-          navigate("/");
+          if (res) {
+            setUserData(res.data);
+            setLoggedIn(true);
+            navigate("/");
+          }
         })
         .catch((err) => {
-          if (err === 400) return console.log("Токен не передан или передан не в том формате");
-          if (err === 401) return console.log("Переданный токен некорректен");
+          if (err === "Ошибка: 400")
+            return console.log("Токен не передан или передан не в том формате");
+          if (err === "Ошибка: 401")
+            return console.log("Переданный токен некорректен");
           console.log(err);
         });
     }
@@ -81,7 +91,6 @@ export default function App() {
 
   function handleLogOut() {
     localStorage.removeItem("token");
-    setUserAuth({});
     setLoggedIn(false);
     navigate("/sign-in");
   }
@@ -89,8 +98,7 @@ export default function App() {
   return (
     <div className="root">
       <div className="page">
-
-        <Header handleLogOut={handleLogOut} user={userAuth}/>
+        <Header handleLogOut={handleLogOut} userData={userData} />
 
         <Routes>
           <Route

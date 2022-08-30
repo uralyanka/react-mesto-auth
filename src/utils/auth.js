@@ -12,6 +12,7 @@ export function register({ email, password }) {
   return fetch(`${baseAuthUrl}/signup`, {
     method: "POST",
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -22,6 +23,7 @@ export function signin({ email, password }) {
   return fetch(`${baseAuthUrl}/signin`, {
     method: "POST",
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -32,8 +34,10 @@ export function getContent({ token }) {
   return fetch(`${baseAuthUrl}/users/me`, {
     method: "GET",
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => checkRes(res));
+  }).then((res) => checkRes(res))
+  .then(data => data)
 }

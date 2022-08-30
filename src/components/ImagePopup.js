@@ -1,5 +1,4 @@
 export default function ImagePopup({ card, onClose }) {
-  //деструктуризировала props
   return (
     <div
       className={`popup popup_type_view-mesto ${card.isOpen && "popup_opened"}`}

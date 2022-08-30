@@ -4,7 +4,6 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 export default function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
-  //деструктуризировала props + разметка
   function handleImageClick() {
     onCardClick(card.link, card.name);
   }
@@ -17,10 +16,8 @@ export default function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     onCardDelete(card);
   }
 
-  // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = card.owner._id === currentUser._id;
 
-  // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
   return (

@@ -4,7 +4,6 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 
 export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete, cards}) {
   const currentUser = useContext(CurrentUserContext);
-  //деструктуризировала props + изменила установку аватара без ref
 
   return (
     <main className="content">

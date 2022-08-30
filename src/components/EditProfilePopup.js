@@ -4,8 +4,6 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 
 export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-
-  //переписала под два стейта + добавила проверку + деструктуризировала props
   const [userName, setUserName] = useState("");
   const [userBio, setUserBio] = useState("");
 

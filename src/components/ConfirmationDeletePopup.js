@@ -1,7 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 
 export default function ConfirmationDeletePopup({ onConfirmClick, isOpen, onClose }) {
-  //деструктуризировала props
   function handleConfirm(e) {
     e.preventDefault();
     onConfirmClick();

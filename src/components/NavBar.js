@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function NavBar({ logOut, user }) {
+export default function NavBar({ logOut, userData }) {
   const [email, setEmail] = useState();
 
   useEffect(() => {
-    setEmail(user.email);
-  },[user]);
+    setEmail(userData.email);
+  },[userData]);
 
   function handleLogOut() {
     logOut();
