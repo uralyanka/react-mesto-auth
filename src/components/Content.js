@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../utils/Api";
+import api from "../utils/api";
 import Main from "./Main";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";

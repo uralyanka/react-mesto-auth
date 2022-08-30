@@ -65,6 +65,7 @@ export default function App() {
       });
   }
 
+  //реализовала аутентификацию при повторном входе
   function handleCheckToken() {
     const token = localStorage.getItem("token");
     if (token) {
@@ -105,9 +106,10 @@ export default function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute loggedIn={loggedIn}>
-                <Content />
-              </ProtectedRoute>
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                component={Content}
+              ></ProtectedRoute>
             }
           />
 

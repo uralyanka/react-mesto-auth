@@ -40,3 +40,4 @@ export function getContent(token) {
     },
   }).then((res) => checkRes(res))
 }
+//убрала лишний then + изменила форму входящих данных в getContent

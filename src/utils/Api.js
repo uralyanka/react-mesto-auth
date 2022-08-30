@@ -1,3 +1,4 @@
+//изменила название файла + шаблонные строки
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -51,7 +52,7 @@ class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(this._cardsUrl + `/${cardId}`, {
+    return fetch(`${this._cardsUrl}/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this._checkRes(res));
@@ -59,12 +60,12 @@ class Api {
 
   likeSwitcher(cardId, isLiked) {
     if (isLiked) {
-      return fetch(this._cardsUrl + `/${cardId}/likes`, {
+      return fetch(`${this._cardsUrl}/${cardId}/likes`, {
         method: "DELETE",
         headers: this._headers,
       }).then((res) => this._checkRes(res));
     } else {
-      return fetch(this._cardsUrl + `/${cardId}/likes`, {
+      return fetch(`${this._cardsUrl}/${cardId}/likes`, {
         method: "PUT",
         headers: this._headers,
       }).then((res) => this._checkRes(res));
